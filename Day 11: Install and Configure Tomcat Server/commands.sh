@@ -1,25 +1,33 @@
+# 1. Connect to App Server 02
 ssh steve@stapp02
-sudo yum install java-1.8.0-openjdk-devel tomcat -y # Install Java Development Kit (JDK) and Tomcat
 
-sudo vi /etc/tomcat/server.xml # Configure Tomcat to Use Port 8082 (instead default 8080)
+# 2. Install Java Development Kit (JDK) and Tomcat
+sudo yum install java-1.8.0-openjdk-devel tomcat -y
 
+# 3. Configure Tomcat to use port 8082 instead of the default 8080
+sudo vi /etc/tomcat/server.xml
 # <Connector port="8082" protocol="HTTP/1.1"
 #            connectionTimeout="20000"
 #            redirectPort="8443" />
 
 
-## Deploy the ROOT.war file from the JumpHost
 
+## --- From the JumpHost, deploy the ROOT.war file ---
 scp /tmp/ROOT.war steve@stapp02:/tmp/
 
 
-## From App Server 2:
 
-sudo mv /tmp/ROOT.war /var/lib/tomcat/webapps/ # Move the ROOT.war file to the Tomcat webapps directory
+## --- Back from App Server 02 ---
+
+# 4. Move the ROOT.war file to the Tomcat webapps directory
+sudo mv /tmp/ROOT.war /var/lib/tomcat/webapps/
+
+# Start and enable the Tomcat service
 sudo systemctl start tomcat
 sudo systemctl enable tomcat
 
 
-## From the JumpHost:
 
-curl http://stapp02:8082 # Verify the webpage works. It will return the HTML content of the webpage
+## --- From the JumpHost ---
+# Verify the webpage works (should return HTML content)
+curl http://stapp02:8082

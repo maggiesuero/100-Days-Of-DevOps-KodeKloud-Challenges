@@ -2,8 +2,8 @@ The Nautilus application development team recently finished the beta version of 
 
 a. Install tomcat server on App Server 2.
 
-b. Configure it to run on port 8082.
+b. Configure it to run on port **8082**.
 
-c. There is a ROOT.war file on Jump host at location /tmp.
+c. There is a **ROOT.war** file on Jump host at location **/tmp**.
 
 Deploy it on this tomcat server and make sure the webpage works directly on base URL i.e curl http://stapp02:8082
